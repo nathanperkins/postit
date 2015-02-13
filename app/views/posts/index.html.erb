@@ -1,19 +1,10 @@
-<p class='lead'>
-  All posts!
-  <hr>
-</p>
+<%= render 'shared/content_title', title: "Post Index" %>
 
 <ul>
-  <% @posts.each do |post| %>
-    <div class='well'>
-      <span class='label label-default'><%= post.categories.first.name %></span>
-      <h3><%= link_to post.title, post.url %></h3>
-      <p><%= link_to 'Comments', post_path(post) %></p>
-      <p>Posted by <%= link_to post.creator.username, user_path(post.creator) %> at <%= post.created_at %>.</p>
-    </div>
-  <% end %>
+  <%= render @posts %>
 </ul>
 
 <hr>
 
 <%= link_to 'New Post', new_post_path %>
+
