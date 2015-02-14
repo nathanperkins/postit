@@ -7,6 +7,7 @@ PostitTemplate::Application.routes.draw do
   # post '/posts', to: 'posts#create'
   # get '/posts/:id/edit', to: 'posts#edit'
   # patch '/posts/:id', to: 'posts#update'
+  # delete 'posts/:od' to: 'posts#destroy'
 
   resources :posts, except: [:destroy] do
     resources :comments, only: [:create]
