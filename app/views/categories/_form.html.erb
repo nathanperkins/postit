@@ -1,6 +1,7 @@
 <%= form_for @category do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br/>
+  <div class='control-group'>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
   <%= f.submit(@category.new_record? ? 'Create Category' : 'Update Record', class: 'btn btn-primary') %>
 <% end %>

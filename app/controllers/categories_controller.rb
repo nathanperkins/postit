@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update]
+  before_action :set_category, only: :show
 
   def show
   end
@@ -16,18 +16,6 @@ class CategoriesController < ApplicationController
       redirect_to category_path(@category)
     else
       render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @category.update(category_params)
-      flash[:notice] = 'Category was updated.'
-      redirect_to category_path(@category)
-    else
-      render :edit
     end
   end
 

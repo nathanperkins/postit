@@ -1,4 +1,4 @@
-<%= render 'shared/content_title', title: 'Post Index' %>
+<%= render 'shared/content_title', title: 'All Posts' %>
 
 <% if @posts.any? %>
   <%= render @posts %>
@@ -6,4 +6,3 @@
 <% end %>
 
 <%= link_to 'New Post', new_post_path %>
-

@@ -1,3 +1,4 @@
-<p><%= render @category %></p>
+<% header = link_to('All Posts', posts_path) + " &raquo; #{@category.name}".html_safe %>
+
+<%= render 'shared/content_title', title: header %>
 <%= render @category.posts %>
-<%= link_to 'Edit Category', edit_category_path(@category) %>
