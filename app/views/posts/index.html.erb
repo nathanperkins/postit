@@ -1,7 +1,9 @@
 <%= render 'shared/content_title', title: 'Post Index' %>
-<%= render @posts %>
 
-<hr>
+<% if @posts.any? %>
+  <%= render @posts %>
+  <hr>
+<% end %>
 
 <%= link_to 'New Post', new_post_path %>
 
