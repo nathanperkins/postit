@@ -1,0 +1,4 @@
+<% header = link_to('All Posts', posts_path) + " &raquo; Users".html_safe %>
+
+<%= render 'shared/content_title', title: header %>
+<%= render @users %>

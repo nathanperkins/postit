@@ -1,4 +1,6 @@
-<h1>User: <%= @user.username %></h1>
+<% header = link_to('All Posts', posts_path) + (" &raquo; " + link_to('Users', users_path) + " &raquo; #{@user.username}").html_safe %>
+
+<%= render 'shared/content_title', title: header %>
 <%= render @user.posts %>
 
-<%= link_to "back to index", posts_path %>
+<%= link_to "back to users", users_path %>
