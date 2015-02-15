@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
     @comment = Comment.new(params.require(:comment).permit(:body))
     @comment.post = @post
-    @comment.creator = User.first
+    @comment.creator = User.all.sample
 
 
     if @comment.save

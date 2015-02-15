@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button class="btn btn-small dropdown-toggle" type="button" id="category-dropdown" data-toggle="dropdown" aria-expanded="true">
+    Categories
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="category-dropdown">
+    <% Category.all.each do |category| %>
+      <li role="presentation"><%= link_to category.name, category_path(category) %></li>
+    <% end %>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><%= link_to 'Create Category', new_category_path %></li>
+  </ul>
+</div>

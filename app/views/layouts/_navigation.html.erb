@@ -3,6 +3,12 @@
     <%= link_to "Postit!", root_path, :class => 'brand' %>
   </li>
   <li>
-    <%= link_to "New Post", new_post_path %>
+    <div class='nav_item'>
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
+    </div>
+  </li>
+  <li>
+    <%= render 'layouts/category_dropdown' %>
   </li>
 </ul>
+

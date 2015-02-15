@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
 
   def index
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "Your post was saved."
+      flash[:notice] = "This post was updated."
       redirect_to post_path(@post)
     else
       render :edit
