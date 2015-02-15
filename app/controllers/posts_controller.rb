@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   def create
     # pattern, setup 
     @post = Post.new(post_params) # created private method to sanitize parameters
+    @post.creator = User.all.sample # change once we add authentication
 
     if @post.save
       flash[:notice] = "Your post was created."
@@ -48,4 +49,5 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find params[:id]
     end
+    
 end

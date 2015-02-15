@@ -1,3 +1,4 @@
-<p>User: <%= @user.username %></p>
+<h1>User: <%= @user.username %></h1>
+<%= render @user.posts %>
 
 <%= link_to "back to index", posts_path %>
