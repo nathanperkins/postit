@@ -12,6 +12,14 @@
       <%= f.label :description %>
       <%= f.text_area :description, rows: 5 %>
     </div>
+    <div class='control-group'>
+      <%= collection_select(:category, :category_id, Category.all, :id, :name, {:selected => @post.category_ids}, {:prompt => true, :multiple => true}) %>
+      <!-- <select name='post[category_ids][]' multiple='multiple'>
+        <option value='1'>Option 1</option>
+        <option value='2'>Option 2</option>
+      </select> -->
+    </div>
+
     <%= f.submit(@post.new_record? ? 'Create Post' : 'Update Post', class: 'btn btn-primary') %>
   <% end %>
 </div>

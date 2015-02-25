@@ -1,0 +1,7 @@
+<h5>Create a comment:</h5>
+<%= render 'shared/errors', errors: @comment.errors %>
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :body, rows: 3 %>
+  <br/>
+  <%= f.submit 'Create comment', class: 'btn btn-submit' %>
+<% end %>

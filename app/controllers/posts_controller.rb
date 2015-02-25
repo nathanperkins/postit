@@ -17,7 +17,7 @@
     # pattern, setup 
     @post = Post.new(post_params) # created private method to sanitize parameters
     @post.creator = User.all.sample # change once we add authentication
-
+    @post.category_ids = params[:category][:category_id]
     if @post.save
       flash[:notice] = "Your post was created."
       redirect_to post_path(@post)
@@ -31,6 +31,7 @@
 
   def update
     if @post.update(post_params)
+      @post.category_ids = params[:category][:category_id]
       flash[:notice] = "This post was updated."
       redirect_to post_path(@post)
     else
@@ -40,7 +41,7 @@
 
   private
     def post_params
-      params.require(:post).permit(:title, :url, :description)
+      params.require(:post).permit(:title, :url, :description, category_ids: [])
       # requires the top level key to be :post
       # permits with bang allows all attributes
       # rails 3 uses attr_accessible in the model

@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.creator = User.all.sample
 
-
     if @comment.save
       flash[:notice] = "Your comment was added."
       redirect_to post_path(@post)
