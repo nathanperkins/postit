@@ -8,6 +8,8 @@
     </p>
     <small><span><%= link_to "#{pluralize(post.comments.size, 'comment')}", post_path(post) %></span></small>
     <br/>
-    <small><%= link_to "Edit post", edit_post_path(post) %></small>
+    <% if logged_in? %>
+      <small><%= link_to "Edit post", edit_post_path(post) %></small>
+    <% end %>
   </div>
 </div>

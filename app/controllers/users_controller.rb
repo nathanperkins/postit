@@ -17,7 +17,8 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "Your user was created."
-      redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to :root
     else #validation error
       render :new
     end
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :password, :password_confirmation)
       # requires the top level key to be :user
       # permits with bang allows all attributes
       # rails 3 uses attr_accessible in the model

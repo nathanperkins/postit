@@ -7,7 +7,9 @@
   <hr>
 <% end %>
 
-<%= render 'comments/form' %>
+<% if logged_in? %>
+  <%= render 'comments/form' %>
+<% end %>
 
 <% if @post.comments.any? %>
   <p><strong>Comments:</strong></p>

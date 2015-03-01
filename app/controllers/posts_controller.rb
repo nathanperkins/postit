@@ -1,5 +1,6 @@
  class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
 
   def index
     @posts = Post.all
@@ -16,7 +17,7 @@
   def create
     # pattern, setup 
     @post = Post.new(post_params) # created private method to sanitize parameters
-    @post.creator = User.all.sample # TODO change once we add authentication
+    @post.creator = current_user # TODO change once we add authentication
     if @post.save
       flash[:notice] = "Your post was created."
       redirect_to post_path(@post)
