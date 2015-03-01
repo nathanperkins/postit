@@ -9,6 +9,7 @@ PostitTemplate::Application.routes.draw do
   # patch '/posts/:id', to: 'posts#update'
   # delete 'posts/:od' to: 'posts#destroy'
 
+  get '/register', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
@@ -17,6 +18,6 @@ PostitTemplate::Application.routes.draw do
     resources :comments, only: [:create]
   end
 
-  resources :users, except: [:destroy]
+  resources :users, only: [:show, :create, :edit, :edit]
   resources :categories, only: [:show, :new, :create]
 end

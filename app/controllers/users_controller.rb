@@ -32,8 +32,4 @@ class UsersController < ApplicationController
       # permits with bang allows all attributes
       # rails 3 uses attr_accessible in the model
     end
-
-    def set_user
-      @user = User.find params[:id]
-    end
 end
