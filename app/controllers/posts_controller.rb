@@ -16,8 +16,7 @@
   def create
     # pattern, setup 
     @post = Post.new(post_params) # created private method to sanitize parameters
-    @post.creator = User.all.sample # change once we add authentication
-    @post.category_ids = params[:category][:category_id]
+    @post.creator = User.all.sample # TODO change once we add authentication
     if @post.save
       flash[:notice] = "Your post was created."
       redirect_to post_path(@post)
@@ -31,7 +30,6 @@
 
   def update
     if @post.update(post_params)
-      @post.category_ids = params[:category][:category_id]
       flash[:notice] = "This post was updated."
       redirect_to post_path(@post)
     else
