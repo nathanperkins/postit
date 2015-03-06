@@ -1,6 +1,12 @@
-  <div class='row'>
-    <div class='span8 well'>
-      <em><p>"<%= comment.body %>"</p></em>
-      <span class='quiet'>by </span><%= link_to comment.creator.username, user_path(comment.creator) %> <small>at <%= display_datetime(comment.created_at) %></small>
-    </div>
+<% show_post ||= false %>
+
+<div class='row'>
+  <div class='span8 well'>
+    <em><p>"<%= comment.body %>"</em> 
+    <% if show_post %>
+      on <%= link_to comment.post.title, post_path(comment.post) %>
+      <% end %>
+    </p>
+    <span class='quiet'>by </span><%= link_to comment.creator.username, user_path(comment.creator) %> <small>at <%= display_datetime(comment.created_at) %></small>
   </div>
+</div>

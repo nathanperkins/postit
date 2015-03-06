@@ -12,6 +12,6 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </div>
-    <%= f.submit(@user.new_record? ? 'Create User' : 'Update User', class: 'btn btn-primary') %>
+    <%= f.submit(@user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success') %>
   <% end %>
 </div>

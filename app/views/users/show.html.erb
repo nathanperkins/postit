@@ -2,19 +2,21 @@
 
 <%= render 'shared/content_title', title: header %>
 <div class='well'>
-  <ul>
-    <li><strong>Username: </strong><%= @user.username %></li>
-    <li><strong>Time zone: </strong><%= "Time zone goes here" %></li>
-  </ul>
+  <dl class='dl-horizontal'>
+    <dt>Username:</dt>
+    <dd><%= @user.username %></dd>
+    <dt>Time zone:</dt>
+    <dd><%= "Time zone goes here" %></dd>
+  </dl>
 </div>
 <hr>
 <h4><%= @user.username %>'s activity</h4>
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Posts</a></li>
-  <li role="presentation"><a href="#">Comments</a></li>
+<ul class="nav nav-tabs">
+  <li role="presentation" class='<%= 'active' if params[:tab].nil? %>'><%= link_to "Posts (#{@user.posts.size})", user_path(@user) %></li>
+  <li role="presentation" class='<%= 'active' if params[:tab] == 'comments' %>'><%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %></li>
 </ul>
 
-<%= render @user.posts %>
-<%= render @user.comments %>
+<%= render @user.posts if params[:tab].nil? %>
+<%= render @user.comments, show_post: true if params[:tab] == 'comments' %>
 
 <%= link_to "back to users", users_path %>

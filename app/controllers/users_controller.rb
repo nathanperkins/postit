@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_same_user, only: [:edit, :update]
+
+
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find params[:id]
   end
 
   def new
@@ -25,11 +28,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:id]
   end
 
   def update
-    @user = User.find params[:id]
+    if @user.update(user_params)
+      flash[:notice] = "Your user was saved."
+      redirect_to user_path(@user)
+    else #validation error
+      render :edit
+    end
   end
 
   private
@@ -39,5 +46,16 @@ class UsersController < ApplicationController
       # requires the top level key to be :user
       # permits with bang allows all attributes
       # rails 3 uses attr_accessible in the model
+    end
+
+    def set_user
+      @user = User.find params[:id]
+    end
+
+    def require_same_user
+      if current_user != @user
+        flash[:error] = "You are not allowed to do that."
+        redirect_to user_path = @user
+      end
     end
 end
