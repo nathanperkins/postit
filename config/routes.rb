@@ -16,7 +16,7 @@ PostitTemplate::Application.routes.draw do
 
   resources :posts, except: [:destroy] do
     member do
-      post :vote
+      post :vote #/posts/3/vote
     end
 
     resources :comments, only: [:create] do

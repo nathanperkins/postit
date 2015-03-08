@@ -1,7 +1,7 @@
-<h5>Create a comment:</h5>
+<h5>Leave a comment:</h5>
 <%= render 'shared/errors', errors: @comment.errors %>
 <%= form_for [@post, @comment] do |f| %> <!-- nests the comments under posts -->
   <%= f.text_area :body, rows: 3, class: 'span4' %>
   <br/>
-  <%= f.submit 'Create comment', class: 'btn btn-submit' %>
+  <%= f.submit 'Create comment', class: 'btn btn-submit btn-primary' %>
 <% end %>

@@ -44,7 +44,7 @@
     if @vote.valid?
       flash[:notice] = "Your vote was counted."
     else
-      flash[:error] = "Your vote was not counted."
+      flash[:error] = "You can only vote on a post once."
     end
 
     redirect_to :back

@@ -1,7 +1,6 @@
 <p><%= render @post.categories %></p>
 <%= render 'shared/content_title', title: @post.title %>
 
-<h5><%= link_to 'Link', external_link(@post.url) %></h5>
 <% if @post.description %>
   <p><%= @post.description %></p>
   <hr>
@@ -13,7 +12,7 @@
 
 <% if @post.comments.any? %>
   <p><strong>Comments:</strong></p>
-  <%= render @post.comments.reverse %>
+  <%= render @post.comments.sort_by{|x| x.total_votes}.reverse %>
 <% end %>
 
 <%= link_to 'back to posts index', posts_path %>
