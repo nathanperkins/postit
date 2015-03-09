@@ -12,7 +12,7 @@
 
 <% if @post.comments.any? %>
   <p><strong>Comments:</strong></p>
-  <%= render @post.comments.sort_by{|x| x.total_votes}.reverse %>
+  <%= render @post.reload.comments.sort_by{|x| x.total_votes}.reverse %>
 <% end %>
 
 <%= link_to 'back to posts index', posts_path %>

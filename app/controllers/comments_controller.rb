@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_post
+  before_action :set_post, only: [:create]
+  before_action :set_comment, only: [:vote]
   before_action :require_user
   
   def create
@@ -35,5 +36,9 @@ class CommentsController < ApplicationController
   private
     def set_post
       @post = Post.find_by slug: params[:post_id]
+    end
+
+    def set_comment
+      @comment = Comment.find params[:id]
     end
 end
