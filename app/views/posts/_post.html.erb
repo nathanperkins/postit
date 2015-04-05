@@ -1,3 +1,9 @@
+<div id='post_<%= post.to_param %>_errors' class='row' style="display: none">
+  <div class='alert alert-error span8'>
+    You can only vote once!
+  </div>
+</div>
+
 <div class='row'>
   <div class='span0 well text-center'>
     <% if logged_in? %>
@@ -7,7 +13,7 @@
       <br/>
     <% end %>
 
-    <span id='post_<%= post.slug %>_votes'><%= post.total_votes %></span>
+    <span id='post_<%= post.to_param %>_votes'><%= post.total_votes %></span>
     
     <% if logged_in? %>
       <br/>
