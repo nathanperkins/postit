@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates_format_of :username, with: /\A[a-z][a-z0-9_]*[a-z0-9]\z/, message: "must contain only lowercase letters, numbers, and underscores"
   validates :password, presence: true, confirmation: true, length: {minimum: 5}, on: :create
+  validates_format_of :phone, with: /\A\d{10}\z/, message: "must be 10 digits"
 
   sluggable_column :username
 
