@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: :show
   before_action :require_user, except: :show
+  before_action :require_admin, only: [:new, :create]
 
   def show
   end

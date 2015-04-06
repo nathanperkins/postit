@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :time_zone, :phone)
       # requires the top level key to be :user
       # permits with bang allows all attributes
       # rails 3 uses attr_accessible in the model

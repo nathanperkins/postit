@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  require 'twilio-ruby'
+  include Sluggable
+
   has_many :posts
   has_many :comments
   has_many :votes
@@ -9,39 +12,40 @@ class User < ActiveRecord::Base
   validates_format_of :username, with: /\A[a-z][a-z0-9_]*[a-z0-9]\z/, message: "must contain only lowercase letters, numbers, and underscores"
   validates :password, presence: true, confirmation: true, length: {minimum: 5}, on: :create
 
-  before_save :generate_slug
+  sluggable_column :username
 
-  def generate_slug
-    the_slug = to_slug(self.username)
-
-    user = User.find_by slug: the_slug
-    count = 2
-    
-    while user && user != self
-      the_slug = append_suffix(the_slug, count)
-      user = User.find_by slug: the_slug
-      count += 1
-    end
-
-    self.slug = the_slug
+  def two_factor_auth?
+    !self.phone.blank?
   end
 
-  def append_suffix(str, count)
-    if str.split('-').last.to_i != 0
-      return str.split('-').slice(0...-1).join('-') + '-' + count.to_s
-    else
-      return str + '-' + count.to_s
-    end
+  def generate_pin!
+    self.update_column(:pin, rand(10 ** 6)) # random 6 digit number
   end
 
-  def to_slug(name)
-    str = name.strip.downcase
-    str = str.gsub(/\s*[^a-z0-9]\s*/,'-')
-    str = str.gsub(/-+/, '-')
-    str
+  def remove_pin!
+    self.update_column(:pin, nil) # random 6 digit number
   end
 
-  def to_param
-    self.slug
+  def send_pin_to_twilio!
+    # put your own credentials here 
+    account_sid = ENV['TWILIO_API_KEY']
+    auth_token = ENV['TWILIO_AUTH_TOKEN']
+     
+    # set up a client to talk to the Twilio REST API 
+    client = Twilio::REST::Client.new account_sid, auth_token 
+
+    client.account.messages.create({
+      :from => '+14157921434', 
+      :to => '+1' + self.phone, 
+      :body => 'Hello, here is your PostIt! authorization PIN: ' + self.pin.to_s
+    })
+  end
+
+  def admin?
+    self.role == 'admin'
+  end
+
+  def moderator?
+    self.role == 'moderator'
   end
 end
